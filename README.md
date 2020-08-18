@@ -16,3 +16,12 @@ Shared task data is available at: [https://github.com/VinAIResearch/COVID19Tweet
 
 To check efficacy of your model(in development), please use the evaluation script [evaluator.py](https://github.com/VinAIResearch/COVID19Tweet/blob/master/evaluator.py)
 
+## Run
+
+```
+python embedding.py
+#for using different embeddings (ELMO or XLNET) change in load.py
+python model.py
+
+```
+
