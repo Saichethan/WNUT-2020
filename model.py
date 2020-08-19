@@ -40,9 +40,13 @@ bert_test = bert_test.reshape(12000,1,1024)
 bert_embeddings = Input(shape = (1, 1024), name="bert")
 gru_units = 250
 
-rnn = Bidirectional(LSTM(gru_units, return_sequences=False, dropout=0.25, recurrent_dropout=0.25), merge_mode='concat')(bert_embeddings)
+rnn = Bidirectional(LSTM(gru_units, return_sequences=True, dropout=0.25, recurrent_dropout=0.25), merge_mode='concat')(elmo_embeddings)
 
-output = Dense(1, activation='sigmoid')(rnn)
+avg_pool = GlobalAveragePooling1D()(rnn)
+max_pool = GlobalMaxPooling1D()(rnn)
+merge = concatenate([avg_pool, max_pool])
+
+output = Dense(1, activation='sigmoid')(merge)
 
 model = Model(inputs=bert_embeddings, outputs=output) 
 model.summary()
@@ -60,6 +64,32 @@ print("Fitting model...")
 history = model.fit(bert_train, y_train, 
 	                    batch_size=500,
 	                    epochs=25, callbacks=callbacks_list, validation_data=(bert_val, y_val)) 
+
+
+#plotting
+import matplotlib.pyplot as plt 
+
+acc = history.history["acc"]
+val_acc = history.history["val_acc"]
+
+loss = history.history["loss"]
+val_loss = history.history["val_loss"]
+
+epochs = range(len(acc))
+
+f1 = plt.figure()
+plt.plot(epochs,acc, label="training")
+plt.plot(epochs,val_acc, label="validation")
+plt.title("accuracy")
+plt.legend()
+f1.savefig("accuracy.pdf")
+
+f2 = plt.figure()
+plt.plot(epochs,loss, label="training")
+plt.plot(epochs,val_loss, label="validation")
+plt.title("loss")
+plt.legend()
+f2.savefig("loss.pdf")
 
 
 
