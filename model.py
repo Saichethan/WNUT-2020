@@ -44,8 +44,16 @@ rnn = Bidirectional(LSTM(gru_units, return_sequences=True, dropout=0.25, recurre
 
 avg_pool = GlobalAveragePooling1D()(rnn)
 max_pool = GlobalMaxPooling1D()(rnn)
+
+#model I
 merge = concatenate([avg_pool, max_pool])
 
+#model II
+o1 = dot([avg_pool, max_pool], axes=[1, 1])
+a1 = multiply([o1, avg_pool])
+
+
+##change here for model I/II
 output = Dense(1, activation='sigmoid')(merge)
 
 model = Model(inputs=bert_embeddings, outputs=output) 
