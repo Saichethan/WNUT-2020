@@ -25,3 +25,22 @@ python model.py
 
 ```
 
+
+## Citation
+
+```
+@inproceedings{reddy-biswal-2020-iiitbh,
+    title = "{IIITBH} at {WNUT}-2020 Task 2: Exploiting the best of both worlds",
+    author = "Reddy, Saichethan  and
+      Biswal, Pradeep",
+    booktitle = "Proceedings of the Sixth Workshop on Noisy User-generated Text (W-NUT 2020)",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.wnut-1.46",
+    doi = "10.18653/v1/2020.wnut-1.46",
+    pages = "342--346",
+    abstract = "In this paper, we present IIITBH team{'}s effort to solve the second shared task of the 6th Workshop on Noisy User-generated Text (W-NUT)i.e Identification of informative COVID-19 English Tweets. The central theme of the task is to develop a system that automatically identify whether an English Tweet related to the novel coronavirus (COVID-19) is Informative or not. Our approach is based on exploiting semantic information from both max pooling and average pooling, to this end we propose two models.",
+}
+```
